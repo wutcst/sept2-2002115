@@ -15,7 +15,6 @@
         <spring.version>5.2.3.RELEASE</spring.version>
     </properties>
     <name>web Maven Webapp</name>
-    <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
     <dependencies>
