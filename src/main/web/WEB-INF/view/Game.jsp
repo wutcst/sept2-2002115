@@ -11,14 +11,15 @@
     <title>Title</title>
     <script src="https://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     <script src="../../js/Game.js"></script>
+
 </head>
-<body>
+<body >
     <div id="text-aera">
 
     </div>
     <input type="text" id="direction" placeholder="请输入方向">
     <button id="go">移动</button>
     <button id="help">帮助</button>
-    <button id="quit">退出</button>
+    <button id="quit" >退出</button>
 </body>
 </html>

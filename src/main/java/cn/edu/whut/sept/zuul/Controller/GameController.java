@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 @Controller
 public class GameController {
-    private final cn.edu.whut.sept.zuul.Entity.Game game = new Game();
+    private final Game game = new Game();
     private final HashMap<Object, Object> resultMap=new HashMap<>();
     @Resource
     private ICommandService CommandService;

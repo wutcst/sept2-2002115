@@ -3,10 +3,15 @@ $(document).ready(function () {
     var text_aera=$("#text-aera");
     var text='';
     $('#go').bind('click',go);
+    $('#help').bind('click',help);
+    $('#quit').bind('click',quit);
     text='<p>'+'Welcome to the World of Zuul!' +'</p>'
         +'<p>'+'World of Zuul is a new, incredibly boring adventure game.' +'</p>'
         +'<p>'+'Type \'help\' if you need help.' +'</p>';
     text_aera.append(text);
+    window.onbeforeunload=function(event){
+        return 'hello';
+    }
     function clear_text_aera() {
         text_aera.innerHTML="";
     }
@@ -46,4 +51,17 @@ $(document).ready(function () {
         var re = new RegExp(regu);
         return re.test(str);
     }
+    function help() {
+        alert("You are lost. You are alone. You wander\n" +
+              "around at the university.\n\n"+
+              "You can play this game by using those buttons:\n"+
+              "\"移动\">>input right direction and move\n"+
+              "\"退出\">>exit this game\n"+
+              "\"帮助\">>you will see this window again~\n"
+        );
+    }
+    function quit(){
+
+    }
 });
+

@@ -10,7 +10,7 @@ public class CommandService implements ICommandService{
     @Override
     public boolean DoCommandGO(Game game,String direction) {
         //方位判断放在前端
-        cn.edu.whut.sept.zuul.Entity.Room currentRoom = game.getCurrentRoom();
+        Room currentRoom = game.getCurrentRoom();
 
         Room nextRoom = game.getCurrentRoom().getExit(direction);
 
