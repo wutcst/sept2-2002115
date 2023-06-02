@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: 月下川
@@ -12,5 +13,6 @@
   </head>
   <body>
   $END$
+  <a href="<c:url value="/Game"/>">点我</a>
   </body>
 </html>
