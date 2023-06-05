@@ -8,9 +8,20 @@ body{
     color: white;
     position: relative;
     left: 50%;
-    height: 300px;
+    height: 200px;
     width: 650px;
     margin-left: -325px;
+    overflow: hidden;
+}
+#message{
+    left: 50%;
+    margin-left: -325px;
+    overflow: hidden;
+    position: relative;
+    color: white;
+    height: 50px;
+    width: 650px;
+    bottom: 0;
 }
 #screen{
     position: relative;
@@ -33,4 +44,8 @@ body{
     position: relative;
     left: 50%;
     margin-left: -300px;
+}
+pre{
+    font-size:16px; /*设置字号*/
+
 }

@@ -17,6 +17,9 @@
     <div id="text-aera">
 
     </div>
+    <div id="message">
+
+    </div>
     <div id="screen">
         <div id="player">
 
