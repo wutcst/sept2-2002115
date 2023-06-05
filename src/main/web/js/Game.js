@@ -8,9 +8,11 @@ $(document).ready(function () {
     const square = document.getElementById('player');
     //给document对象添加键盘事件监听以及触发回调函数
     document.addEventListener('keydown', movesquare);
+    //为按钮进行事件绑定
     $('#go').bind('click',go);
     $('#help').bind('click',help);
     $('#quit').bind('click',quit);
+    //添加开始时的说明文本
     text='<p>'+'Welcome to the World of Zuul!' +'</p>'
         +'<p>'+'World of Zuul is a new, incredibly boring adventure game.' +'</p>'
         +'<p>'+'Type \'help\' if you need help.' +'</p>'
@@ -29,13 +31,41 @@ $(document).ready(function () {
         }
     });
     text_aera.append(text);
-    function go() {
-        var direction=$("#direction").val();
-        if (isNull(direction)){
-            var message='<p>'+'Go Where?'+'</p>';
-            text_aera.append(message);
-            $('#direction').text='';
-        }else{
+    //go命令实现
+    // function go() {
+    //     var direction=$("#direction").val();
+    //     if (isNull(direction)){
+    //         var message='<p>'+'Go Where?'+'</p>';
+    //         text_aera.append(message);
+    //     }else{
+    //         $.ajax({
+    //             url:baseurl+"/GO",
+    //             data:{direction:direction},
+    //             type:"post",
+    //             dataType:"json",
+    //             async:false,
+    //             success:function (result) {
+    //                 //根据返回情况更改文本域
+    //                 if (result.status===1){
+    //                     text_aera.empty();
+    //                     text='<p>'+result.discription+'</p>';
+    //                     text_aera.append(text);
+    //                 }else{
+    //                     var warn='<p>'+result.discription+'</p>';
+    //                     text_aera.append(warn);
+    //                 }
+    //
+    //             },
+    //             error:function (e) {
+    //
+    //             }
+    //         });
+    //     }
+    // }
+
+    //根据玩家移动执行go命令的方法
+    function go(direction) {
+        //由于用移动控制不存在方向错误的情况，相较于初始的方法删除了验证
             $.ajax({
                 url:baseurl+"/GO",
                 data:{direction:direction},
@@ -43,10 +73,28 @@ $(document).ready(function () {
                 dataType:"json",
                 async:false,
                 success:function (result) {
+                    //根据返回情况更改文本域
                     if (result.status===1){
                         text_aera.empty();
                         text='<p>'+result.discription+'</p>';
                         text_aera.append(text);
+                        //根据移动方向调整方块位置
+                        if(result.direct==='west'){
+                            square.style.left = 600 + 'px';
+                            square.style.top = 150 + 'px';
+                        }
+                        else if(result.direct==='east'){
+                            square.style.left = 0 + 'px';
+                            square.style.top = 150 + 'px';
+                        }
+                        else if(result.direct==='south'){
+                            square.style.left = 300 + 'px';
+                            square.style.top = 0 + 'px';
+                        }
+                        else if(result.direct==='north'){
+                            square.style.left = 300 + 'px';
+                            square.style.top = 300 + 'px';
+                        }
                     }else{
                         var warn='<p>'+result.discription+'</p>';
                         text_aera.append(warn);
@@ -57,14 +105,8 @@ $(document).ready(function () {
 
                 }
             });
-        }
     }
-    function isNull( str ){
-        if ( str === "" ) return true;
-        var regu = "^[ ]+$";
-        var re = new RegExp(regu);
-        return re.test(str);
-    }
+    //help弹出窗口
     function help() {
         alert("You are lost. You are alone. You wander\n" +
               "around at the university.\n\n"+
@@ -102,23 +144,32 @@ $(document).ready(function () {
         //offsetTop属性代表元素相对父元素的上偏移量
         if (e.keyCode === 37) {
             //设置要往左边移动的偏移量
-            let left = square.offsetLeft - distance
+            let left = square.offsetLeft - distance;
             //小方块碰壁检测 如果此时已经到边界则设置style.left为0
-            if (left <= 0) {
-                square.style.left = 0 + 'px'
-                return
+            if (left < 0) {
+                //执行go命令
+                go("west");
+                //切换换背景
+
+                //切换音乐
+
+                return;
             }
             //设置小方块的left值为left + 'px'
-            square.style.left = left + 'px'
+            square.style.left = left + 'px';
         }
         //判断键盘输入是否为 ↑ 键
         else if (e.keyCode === 38) {
         //设置要往上边移动的偏移量
-            let top = square.offsetTop - distance
-            if (top <= 0) {
-                //小方块碰壁检测 如果此时已经到边界则设置style.top为0
-                square.style.top = 0 + 'px'
-                return
+            let top = square.offsetTop - distance;
+            if (top < 0) {
+                //执行go命令
+                go("north");
+                //切换换背景
+
+                //切换音乐
+
+                return;
             }
             //设置小方块的top值为top + 'px'
             square.style.top = top + 'px'
@@ -126,28 +177,34 @@ $(document).ready(function () {
         //判断键盘输入是否为 → 键
         else if (e.keyCode === 39) {
         //设置要往左边移动的偏移量
-            let left = square.offsetLeft + distance
-            if (left >= 550) {
-            //小方块碰壁检测 如果此时已经到边界则设置style.left为420
-            //420由外层盒子宽度减去小方块宽度得出
-            square.style.left = 550 + 'px'
-            return
+            let left = square.offsetLeft + distance;
+            if (left > 600) {
+                //执行go命令
+                go("east");
+                //切换换背景
+
+                //切换音乐
+
+                return
             }
-            //设置小方块的left值为top + 'px'
-            square.style.left = left + 'px'
+            //设置小方块的left值为left + 'px'
+            square.style.left = left + 'px';
         }
         //判断键盘输入是否为 ↓ 键
         else if (e.keyCode === 40) {
         //设置要往上边移动的偏移量
-            let top = square.offsetTop + distance
-            if (top >= 250) {
-            //小方块碰壁检测 如果此时已经到边界则设置style.top为420
-            //420由外层盒子高度减去小方块高度得出
-            square.style.top = 250 + 'px'
-            return
+            let top = square.offsetTop + distance;
+            if (top > 300) {
+                //执行go命令
+                go("south");
+                //切换换背景
+
+                //切换音乐
+
+                return;
             }
-        //设置小方块的left值为top + 'px'
-            square.style.top = top + 'px'
+        //设置小方块的top值为top + 'px'
+            square.style.top = top + 'px';
         }
         else if (e.keyCode === 17) {
             if(distance===10){
@@ -156,8 +213,8 @@ $(document).ready(function () {
                 distance=10;
             }
         }
-        else if (e.keyCode === 13) {
-            go();
+        else if (e.keyCode === 72) {
+            help();
         }
     }
 
