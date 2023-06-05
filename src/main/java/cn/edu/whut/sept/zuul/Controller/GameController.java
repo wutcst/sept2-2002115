@@ -25,6 +25,7 @@ public class GameController {
     @ResponseBody
     public Object GO(String direction){
         String message;
+        resultMap.put("direct",direction);
         if(CommandService.DoCommandGO(game,direction)){
             message=game.getCurrentRoom().getLongDescription();
             resultMap.put("status",1);

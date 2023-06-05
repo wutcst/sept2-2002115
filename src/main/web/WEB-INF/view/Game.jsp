@@ -23,10 +23,7 @@
         </div>
     </div>
     <div id="control">
-        <input type="text" id="direction" placeholder="请输入方向">
-        <button id="go">移动</button>
         <button id="help">帮助</button>
-        <button id="quit" >退出</button>
     </div>
 
 </body>
