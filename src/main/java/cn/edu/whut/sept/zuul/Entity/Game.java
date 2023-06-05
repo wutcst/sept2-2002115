@@ -11,17 +11,14 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 1.0
  */
-package cn.edu.whut.sept.zuul;
-
+package cn.edu.whut.sept.zuul.Entity;
 public class Game
 {
-    private Parser parser;
     private Room currentRoom;
 
     public Game()
     {
         createRooms();
-        parser = new Parser();
     }
 
     private void createRooms()
@@ -50,36 +47,6 @@ public class Game
         office.setExit("west", lab);
 
         currentRoom = outside;  // start game outside
-    }
-
-    public void play()
-    {
-        printWelcome();
-
-        // Enter the main command loop.  Here we repeatedly read commands and
-        // execute them until the game is over.
-
-        boolean finished = false;
-        while (! finished) {
-            Command command = parser.getCommand();
-            if(command == null) {
-                System.out.println("I don't understand...");
-            } else {
-                finished = command.execute(this);
-            }
-        }
-
-        System.out.println("Thank you for playing.  Good bye.");
-    }
-
-    private void printWelcome()
-    {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
-        System.out.println();
-        System.out.println(currentRoom.getLongDescription());
     }
 
     public Room getCurrentRoom() {
