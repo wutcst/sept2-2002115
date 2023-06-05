@@ -12,18 +12,25 @@
  * @version 1.0
  */
 package cn.edu.whut.sept.zuul.Entity;
+
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Game
 {
     private Room currentRoom;
+    private final ArrayList<Room> gameRooms;  // 保存游戏中的所有非传输房间，以实现随机传送房间的功能
 
     public Game()
     {
+        currentRoom = null;
+        gameRooms = new ArrayList<>();
         createRooms();
     }
 
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
+        Room outside, theater, pub, lab, office, transfer;
 
         // create the rooms
         outside = new Room("outside the main entrance of the university");
@@ -31,6 +38,8 @@ public class Game
         pub = new Room("in the campus pub");
         lab = new Room("in a computing lab");
         office = new Room("in the computing admin office");
+        transfer = new Room("transfer room");
+        transfer.setTransfer(true);
 
         // initialise room exits
         outside.setExit("east", theater);
@@ -38,15 +47,35 @@ public class Game
         outside.setExit("west", pub);
 
         theater.setExit("west", outside);
+        theater.addObject(new RoomObject("TV", 40));
+        theater.addObject(new RoomObject("seat", 5));
 
         pub.setExit("east", outside);
+        pub.setExit("north", transfer);
+        pub.addObject(new RoomObject("cup", 2));
+        pub.addObject(new RoomObject("wine", 5));
 
         lab.setExit("north", outside);
         lab.setExit("east", office);
+        lab.addObject(new RoomObject("microscope", 30));
+        lab.addObject(new RoomObject("computer", 30));
 
         office.setExit("west", lab);
+        office.addObject(new RoomObject("desk", 20));
+        office.addObject(new RoomObject("book", 10));
+        office.addObject(new RoomObject("pen", 3));
+
+        gameRooms.add(outside);
+        gameRooms.add(theater);
+        gameRooms.add(pub);
+        gameRooms.add(lab);
+        gameRooms.add(office);
 
         currentRoom = outside;  // start game outside
+    }
+
+    public Room randomNonTransferRoom() {
+        return gameRooms.get(new Random().nextInt(gameRooms.size()));
     }
 
     public Room getCurrentRoom() {

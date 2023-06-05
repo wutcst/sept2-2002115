@@ -12,7 +12,7 @@ public class CommandService implements ICommandService{
         //方位判断放在前端
         Room currentRoom = game.getCurrentRoom();
 
-        Room nextRoom = game.getCurrentRoom().getExit(direction);
+        Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
 //            System.out.println("There is no door!");
@@ -20,6 +20,13 @@ public class CommandService implements ICommandService{
         }
         else {
             game.setCurrentRoom(nextRoom);
+
+            // 如果是传输房间，随机去另一个非传输房间
+            if (nextRoom.getTransfer()) {
+                // （可在此输出提示信息）
+                game.setCurrentRoom(game.randomNonTransferRoom());
+            }
+
             return true;
         }
 
@@ -33,5 +40,12 @@ public class CommandService implements ICommandService{
     @Override
     public void DoCommandQUIT(Game game) {
 
+    }
+
+    @Override
+    public String DoCommandLOOK(Game game) {
+
+        return game.getCurrentRoom().getShortDescription() + "\nThings in this room:\n" +
+                game.getCurrentRoom().getObjectsDescription();
     }
 }
