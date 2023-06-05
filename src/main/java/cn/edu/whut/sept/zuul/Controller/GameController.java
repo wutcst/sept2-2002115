@@ -2,7 +2,6 @@ package cn.edu.whut.sept.zuul.Controller;
 
 import cn.edu.whut.sept.zuul.Entity.Game;
 import cn.edu.whut.sept.zuul.Service.ICommandService;
-import com.alibaba.fastjson.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,12 +38,11 @@ public class GameController {
         }
 
     }
-    @RequestMapping(value = "/HELP")
-    public void HELP(){
-
+    @RequestMapping(value = "/GetCurrentRoom",method = RequestMethod.GET)
+    @ResponseBody
+    private Object testJson(){
+        resultMap.put("discription",this.game.getCurrentRoom().getLongDescription());
+        return resultMap;
     }
-    @RequestMapping(value = "/QUIT")
-    public void QUIT(){
 
-    }
 }

@@ -5,8 +5,9 @@
          version="4.0">
     <display-name>xss</display-name>
     <welcome-file-list>
-        <welcome-file>/index.jsp</welcome-file>
-<!--        <welcome-file>/WEB-INF/view/Game.jsp</welcome-file>-->
+<!--    <welcome-file>/index.jsp</welcome-file>-->
+<!--        <welcome-file>/WEB-INF/view/index.jsp</welcome-file>-->
+        <welcome-file>/WEB-INF/view/Game.jsp</welcome-file>
     </welcome-file-list>
 <!--        1.配置Spring监听器-->
 <!--        启动web容器时，自动装配applicationContext.xml配置信息，初始化bean-->
