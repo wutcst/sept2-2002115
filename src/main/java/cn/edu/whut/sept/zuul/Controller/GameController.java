@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.Set;
 
 @Controller
 public class GameController {
@@ -30,6 +31,15 @@ public class GameController {
             message=game.getCurrentRoom().getLongDescription();
             resultMap.put("status",1);
             resultMap.put("discription",message);
+            resultMap.put("name",game.getCurrentRoom().getName());
+            resultMap.put("east",0);
+            resultMap.put("west",0);
+            resultMap.put("south",0);
+            resultMap.put("north",0);
+            Set<String> keys = game.getCurrentRoom().getExit().keySet();
+            for(String exit : keys) {
+                resultMap.replace(exit,1);
+            }
             return resultMap;
         }else{
             message="There is no door!";
@@ -51,6 +61,15 @@ public class GameController {
     @ResponseBody
     private Object testJson(){
         resultMap.put("discription",this.game.getCurrentRoom().getLongDescription());
+        resultMap.put("name",game.getCurrentRoom().getName());
+        resultMap.put("east",0);
+        resultMap.put("west",0);
+        resultMap.put("south",0);
+        resultMap.put("north",0);
+        Set<String> keys = game.getCurrentRoom().getExit().keySet();
+        for(String exit : keys) {
+            resultMap.replace(exit,1);
+        }
         return resultMap;
     }
 

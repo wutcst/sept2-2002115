@@ -5,13 +5,15 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Room {
+    private String name;
     private final String description;
     private final HashMap<String, Room> exits;        // stores exits of this room.
     private final ArrayList<RoomObject> roomObjects;    // 房间内含有的物品
     private boolean transfer;   // 是否为传输房间
 
-    public Room(String description)
+    public Room(String name,String description)
     {
+        this.name=name;
         this.description = description;
         exits = new HashMap<>();
         roomObjects = new ArrayList<>();
@@ -22,7 +24,9 @@ public class Room {
     {
         exits.put(direction, neighbor);
     }
-
+    public HashMap<String, Room> getExit(){
+        return exits;
+    }
     public String getShortDescription()
     {
         return description;
@@ -74,4 +78,5 @@ public class Room {
     public boolean getTransfer() {
         return transfer;
     }
+    public String getName(){return name;}
 }

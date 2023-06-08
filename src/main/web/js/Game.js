@@ -3,6 +3,7 @@ $(document).ready(function () {
     var text_aera=$("#text-aera");
     var text='';
     var mes=$("#message");
+    var screen=$("#screen")
     //设置小方块每次移动的距离
     let distance = 10;
     //获取小方块suqare元素
@@ -24,6 +25,7 @@ $(document).ready(function () {
         async:false,
         success:function (result) {
             text+='<pre>'+result.discription+'</pre>';
+            display_DIR(result);
         },
         error:function (e) {
             alert("初始化失败，请检查控制台！");
@@ -95,6 +97,10 @@ $(document).ready(function () {
                             square.style.left = 300 + 'px';
                             square.style.top = 300 + 'px';
                         }
+                        //根据当前房间添加箭头
+                        display_DIR(result);
+                        //更改背景
+                        change_BGI(result.name)
                     }else{
                         var warn='<p>'+result.discription+'</p>';
                         mes.append(warn);
@@ -109,6 +115,37 @@ $(document).ready(function () {
 
                 }
             });
+    }
+    //更改背景图片
+    function change_BGI(image) {
+        screen.css("background-image","url(/images/"+image+".png)")
+    }
+    //加载方向指示
+    function display_DIR(result) {
+        var east=$("#east");
+        var west=$("#west");
+        var south=$("#south");
+        var north=$("#north");
+        if(result.east===1){
+            east.show();
+        }else{
+            east.hide();
+        }
+        if(result.west===1){
+            west.show();
+        }else{
+            west.hide();
+        }
+        if(result.south===1){
+            south.show();
+        }else{
+            south.hide();
+        }
+        if(result.north===1){
+            north.show();
+        }else{
+            north.hide();
+        }
     }
     //help弹出窗口
     function help() {
