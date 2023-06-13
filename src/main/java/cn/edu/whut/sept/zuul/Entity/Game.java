@@ -33,12 +33,12 @@ public class Game
         Room outside, theater, pub, lab, office, transfer;
 
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        transfer = new Room("transfer room");
+        outside = new Room("outside","outside the main entrance of the university");
+        theater = new Room("theater","in a lecture theater");
+        pub = new Room("pub","in the campus pub");
+        lab = new Room("lab","in a computing lab");
+        office = new Room("office","in the computing admin office");
+        transfer = new Room("transfer","transfer room");
         transfer.setTransfer(true);
 
         // initialise room exits

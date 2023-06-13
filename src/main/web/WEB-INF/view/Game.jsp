@@ -21,6 +21,10 @@
 
     </div>
     <div id="screen">
+        <div id="east"></div>
+        <div id="west"></div>
+        <div id="south"></div>
+        <div id="north"></div>
         <div id="player">
 
         </div>
