@@ -51,4 +51,10 @@ public class CommandService implements ICommandService{
                 + "\n"
                 + game.getCurrentRoom().getExitString();
     }
+
+    public void DoCommandBACK(Game game){
+        Room saveRoom = game.getCurrentRoom();
+        game.setCurrentRoom(game.getLastRoom());
+        game.setLastRoom(saveRoom);
+    }
 }

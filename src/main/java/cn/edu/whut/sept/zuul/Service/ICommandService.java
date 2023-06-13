@@ -7,4 +7,5 @@ public interface ICommandService {
     void DoCommandHELP(Game game);
     void DoCommandQUIT(Game game);
     String DoCommandLOOK(Game game);
+    void DoCommandBACK(Game game);
 }
