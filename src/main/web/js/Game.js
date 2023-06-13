@@ -26,6 +26,7 @@ $(document).ready(function () {
         success:function (result) {
             text+='<pre>'+result.discription+'</pre>';
             display_DIR(result);
+            change_BGI(result.name);
         },
         error:function (e) {
             alert("初始化失败，请检查控制台！");
