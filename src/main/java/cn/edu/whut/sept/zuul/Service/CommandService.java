@@ -80,4 +80,10 @@ public class CommandService implements ICommandService{
     public void DoCommandDROP(Game game, RoomObject roomObject) {
         game.getCurrentPlayer().dropObject(roomObject);
     }
+
+    public void DoCommandBACK(Game game){
+        Room saveRoom = game.getCurrentRoom();
+        game.setCurrentRoom(game.getLastRoom());
+        game.setLastRoom(saveRoom);
+    }
 }
