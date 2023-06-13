@@ -28,15 +28,15 @@ public class GameController {
         String message;
         resultMap.put("direct",direction);
         if(CommandService.DoCommandGO(game,direction)){
-            message=game.getCurrentRoom().getLongDescription();
+            message=game.getCurrentPlayer().currentRoom.getLongDescription();
             resultMap.put("status",1);
             resultMap.put("discription",message);
-            resultMap.put("name",game.getCurrentRoom().getName());
+            resultMap.put("name",game.getCurrentPlayer().currentRoom.getName());
             resultMap.put("east",0);
             resultMap.put("west",0);
             resultMap.put("south",0);
             resultMap.put("north",0);
-            Set<String> keys = game.getCurrentRoom().getExit().keySet();
+            Set<String> keys = game.getCurrentPlayer().currentRoom.getExit().keySet();
             for(String exit : keys) {
                 resultMap.replace(exit,1);
             }
@@ -60,13 +60,13 @@ public class GameController {
     @RequestMapping(value = "/GetCurrentRoom",method = RequestMethod.GET)
     @ResponseBody
     private Object testJson(){
-        resultMap.put("discription",this.game.getCurrentRoom().getLongDescription());
-        resultMap.put("name",game.getCurrentRoom().getName());
+        resultMap.put("discription",this.game.getCurrentPlayer().currentRoom.getLongDescription());
+        resultMap.put("name",game.getCurrentPlayer().currentRoom.getName());
         resultMap.put("east",0);
         resultMap.put("west",0);
         resultMap.put("south",0);
         resultMap.put("north",0);
-        Set<String> keys = game.getCurrentRoom().getExit().keySet();
+        Set<String> keys = game.getCurrentPlayer().currentRoom.getExit().keySet();
         for(String exit : keys) {
             resultMap.replace(exit,1);
         }
