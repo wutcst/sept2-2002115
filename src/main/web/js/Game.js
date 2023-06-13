@@ -2,6 +2,7 @@ var baseurl="http://localhost:8080";
 $(document).ready(function () {
     var text_aera=$("#text-aera");
     var text='';
+    var mes=$("#message");
     //设置小方块每次移动的距离
     let distance = 10;
     //获取小方块suqare元素
@@ -15,15 +16,14 @@ $(document).ready(function () {
     //添加开始时的说明文本
     text='<p>'+'Welcome to the World of Zuul!' +'</p>'
         +'<p>'+'World of Zuul is a new, incredibly boring adventure game.' +'</p>'
-        +'<p>'+'Type \'help\' if you need help.' +'</p>'
-        +'<p>&nbsp</p>';
+        +'<p>'+'Type \'help\' if you need help.' +'</p>';
     $.ajax({
         url:baseurl+"/GetCurrentRoom",
         type:"get",
         dataType:"json",
         async:false,
         success:function (result) {
-            text+='<p>'+result.discription+'</p>';
+            text+='<pre>'+result.discription+'</pre>';
         },
         error:function (e) {
             alert("初始化失败，请检查控制台！");
@@ -76,7 +76,7 @@ $(document).ready(function () {
                     //根据返回情况更改文本域
                     if (result.status===1){
                         text_aera.empty();
-                        text='<p>'+result.discription+'</p>';
+                        text='<pre>'+result.discription+'</pre>';
                         text_aera.append(text);
                         //根据移动方向调整方块位置
                         if(result.direct==='west'){
@@ -97,7 +97,11 @@ $(document).ready(function () {
                         }
                     }else{
                         var warn='<p>'+result.discription+'</p>';
-                        text_aera.append(warn);
+                        mes.append(warn);
+                        //提示语停留1.5秒
+                        setTimeout(function () {
+                            mes.empty();
+                        },1500);
                     }
 
                 },
@@ -138,6 +142,25 @@ $(document).ready(function () {
     //     }
     // });
         //编写处理小方块移动的方法
+
+    //look命令
+    function look(){
+        $.ajax({
+            url:baseurl+"/LOOK",
+            type:"get",
+            dataType:"json",
+            async:false,
+            success:function (result) {
+                text='<pre>'+result.message+'</pre>';
+                text_aera.empty();
+                text_aera.append(text);
+            },
+            error:function (e) {
+                alert("初始化失败，请检查控制台！");
+                console.log(e);
+            }
+        });
+    }
     function movesquare(e) {
         //判断键盘输入是否为 ← 键
         //offsetLeft属性代表元素相对父元素的左偏移量
@@ -206,6 +229,7 @@ $(document).ready(function () {
         //设置小方块的top值为top + 'px'
             square.style.top = top + 'px';
         }
+        //按键左Ctrl控制速度
         else if (e.keyCode === 17) {
             if(distance===10){
                 distance=50;
@@ -213,8 +237,13 @@ $(document).ready(function () {
                 distance=10;
             }
         }
+        //按键H调出帮助窗口
         else if (e.keyCode === 72) {
             help();
+        }
+        //按键左Q触发LOOK命令
+        else if (e.keyCode === 81) {
+            look();
         }
     }
 

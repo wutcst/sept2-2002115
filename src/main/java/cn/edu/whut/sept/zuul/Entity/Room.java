@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Room {
     private final String description;
-    private final HashMap<String, cn.edu.whut.sept.zuul.Entity.Room> exits;        // stores exits of this room.
+    private final HashMap<String, Room> exits;        // stores exits of this room.
     private final ArrayList<RoomObject> roomObjects;    // 房间内含有的物品
     private boolean transfer;   // 是否为传输房间
 
@@ -33,7 +33,7 @@ public class Room {
         return "You are " + description + ".\n" + getExitString();
     }
 
-    private String getExitString()
+    public String getExitString()
     {
         StringBuilder returnString = new StringBuilder("Exits:");
         Set<String> keys = exits.keySet();
@@ -54,10 +54,15 @@ public class Room {
 
     public String getObjectsDescription() {
         StringBuilder stringBuilder = new StringBuilder();
-
-        for (RoomObject roomObject: roomObjects) {
-            stringBuilder.append(roomObject.getGameDescription()).append("\n");
+        if (roomObjects.size()==0){
+            stringBuilder.append("Well……There's nothing.");
+        }else{
+            for (RoomObject roomObject: roomObjects) {
+                stringBuilder.append(roomObject.getGameDescription()).append("\n");
+            }
         }
+
+
 
         return stringBuilder.toString();
     }

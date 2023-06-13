@@ -45,7 +45,10 @@ public class CommandService implements ICommandService{
     @Override
     public String DoCommandLOOK(Game game) {
 
-        return game.getCurrentRoom().getShortDescription() + "\nThings in this room:\n" +
-                game.getCurrentRoom().getObjectsDescription();
+        return game.getCurrentRoom().getShortDescription()
+                + "\n\nThings in this room:\n"
+                + game.getCurrentRoom().getObjectsDescription()
+                + "\n"
+                + game.getCurrentRoom().getExitString();
     }
 }

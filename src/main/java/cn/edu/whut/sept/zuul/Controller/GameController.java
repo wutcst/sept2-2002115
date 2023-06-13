@@ -39,6 +39,14 @@ public class GameController {
         }
 
     }
+    @RequestMapping(value = "/LOOK",method = RequestMethod.GET)
+    @ResponseBody
+    public Object LOOK(){
+        String message;
+        message=CommandService.DoCommandLOOK(this.game);
+        resultMap.put("message",message);
+        return resultMap;
+    }
     @RequestMapping(value = "/GetCurrentRoom",method = RequestMethod.GET)
     @ResponseBody
     private Object testJson(){
