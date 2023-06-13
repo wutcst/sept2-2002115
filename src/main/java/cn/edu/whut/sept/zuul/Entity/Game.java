@@ -16,14 +16,15 @@ package cn.edu.whut.sept.zuul.Entity;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Game
-{
-    private Room currentRoom;
+public class Game {
+//    private Room currentRoom; // Player类中已经包含了currentRoom信息
+    private Player currentPlayer;   // 当前玩家
     private final ArrayList<Room> gameRooms;  // 保存游戏中的所有非传输房间，以实现随机传送房间的功能
     private Room lastRoom;
     public Game()
     {
-        currentRoom = null;
+//        currentRoom = null;
+        currentPlayer = null;
         gameRooms = new ArrayList<>();
         createRooms();
     }
@@ -71,19 +72,30 @@ public class Game
         gameRooms.add(lab);
         gameRooms.add(office);
 
-        currentRoom = outside;  // start game outside
+        if (currentPlayer != null) {
+            currentPlayer.currentRoom = outside;
+        }
+//        currentRoom = outside;  // start game outside
     }
 
     public Room randomNonTransferRoom() {
         return gameRooms.get(new Random().nextInt(gameRooms.size()));
     }
 
-    public Room getCurrentRoom() {
-        return currentRoom;
+//    public Room getCurrentRoom() {
+//        return currentRoom;
+//    }
+
+//    public void setCurrentRoom(Room room){
+//        this.currentRoom = room;
+//    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
     }
 
-    public void setCurrentRoom(Room room){
-        this.currentRoom = room;
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 
     /**.

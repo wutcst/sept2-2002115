@@ -18,4 +18,8 @@ public class RoomObject {
                 ",  weight: " +
                 weight;
     }
+
+    public int getWeight() {
+        return weight;
+    }
 }
