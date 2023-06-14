@@ -199,6 +199,30 @@ $(document).ready(function () {
             }
         });
     }
+
+    function back() {
+        $.ajax({
+            url:baseurl+"/BACK",
+            type:"get",
+            dataType:"json",
+            async:false,
+            success:function (result) {
+                square.style.left=300+'px';
+                square.style.top=150+'px';
+                text_aera.empty();
+                text='<pre>'+result.discription+'</pre>';
+                text_aera.append(text);
+                display_DIR(result);
+                change_BGI(result.name);
+            },
+            error:function (e) {
+                alert("返回失败，请检查控制台！");
+                console.log(e);
+            }
+        });
+    }
+
+    //添加键盘监听
     function movesquare(e) {
         //判断键盘输入是否为 ← 键
         //offsetLeft属性代表元素相对父元素的左偏移量
@@ -282,6 +306,11 @@ $(document).ready(function () {
         //按键左Q触发LOOK命令
         else if (e.keyCode === 81) {
             look();
+        }
+        //Esc出发返回
+        else if (e.keyCode === 27) {
+            //back
+            back();
         }
     }
 

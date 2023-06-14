@@ -5,8 +5,6 @@ public class RoomObject {
     private final int weight; // 重量
 
     //物品坐标
-    private int left;
-    private int top;
 
     public RoomObject(String name, int weight) {
         this.name = name;

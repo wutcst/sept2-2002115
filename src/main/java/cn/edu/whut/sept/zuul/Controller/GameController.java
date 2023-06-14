@@ -59,7 +59,24 @@ public class GameController {
     }
     @RequestMapping(value = "/GetCurrentRoom",method = RequestMethod.GET)
     @ResponseBody
-    private Object testJson(){
+    private Object GetCurrentRoom(){
+        resultMap.put("discription",this.game.getCurrentPlayer().currentRoom.getLongDescription());
+        resultMap.put("name",game.getCurrentPlayer().currentRoom.getName());
+        resultMap.put("east",0);
+        resultMap.put("west",0);
+        resultMap.put("south",0);
+        resultMap.put("north",0);
+        Set<String> keys = game.getCurrentPlayer().currentRoom.getExit().keySet();
+        for(String exit : keys) {
+            resultMap.replace(exit,1);
+        }
+        return resultMap;
+    }
+
+    @RequestMapping(value = "/BACK",method = RequestMethod.GET)
+    @ResponseBody
+    private Object BACK(){
+        CommandService.DoCommandBACK(game);
         resultMap.put("discription",this.game.getCurrentPlayer().currentRoom.getLongDescription());
         resultMap.put("name",game.getCurrentPlayer().currentRoom.getName());
         resultMap.put("east",0);

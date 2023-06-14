@@ -20,11 +20,13 @@ public class CommandService implements ICommandService{
             return false;
         }
         else {
+            game.setLastRoom(currentRoom);
             game.getCurrentPlayer().setCurrentRoom(nextRoom);
 
             // 如果是传输房间，随机去另一个非传输房间
             if (nextRoom.getTransfer()) {
                 // （可在此输出提示信息）
+                game.setLastRoom(currentRoom);
                 game.getCurrentPlayer().setCurrentRoom(game.randomNonTransferRoom());
             }
 
@@ -82,8 +84,8 @@ public class CommandService implements ICommandService{
     }
 
     public void DoCommandBACK(Game game){
-        Room saveRoom = game.getCurrentRoom();
-        game.setCurrentRoom(game.getLastRoom());
+         Room saveRoom = game.getCurrentPlayer().getCurrentRoom();
+        game.getCurrentPlayer().setCurrentRoom(game.getLastRoom());
         game.setLastRoom(saveRoom);
     }
 }

@@ -24,7 +24,7 @@ public class Game {
     public Game()
     {
 //        currentRoom = null;
-        currentPlayer = null;
+        currentPlayer = new Player();
         gameRooms = new ArrayList<>();
         createRooms();
     }
@@ -74,6 +74,7 @@ public class Game {
 
         if (currentPlayer != null) {
             currentPlayer.currentRoom = outside;
+            this.setLastRoom(outside);
         }
 //        currentRoom = outside;  // start game outside
     }
