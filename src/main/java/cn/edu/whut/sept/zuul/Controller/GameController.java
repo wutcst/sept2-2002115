@@ -1,6 +1,7 @@
 package cn.edu.whut.sept.zuul.Controller;
 
 import cn.edu.whut.sept.zuul.Entity.Game;
+import cn.edu.whut.sept.zuul.Entity.Player;
 import cn.edu.whut.sept.zuul.Service.ICommandService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,7 @@ public class GameController {
             resultMap.put("west",0);
             resultMap.put("south",0);
             resultMap.put("north",0);
+            resultMap.put("objects_room",this.game.getCurrentPlayer().currentRoom.getRoomObjects());
             Set<String> keys = game.getCurrentPlayer().currentRoom.getExit().keySet();
             for(String exit : keys) {
                 resultMap.replace(exit,1);
@@ -59,18 +61,26 @@ public class GameController {
     }
     @RequestMapping(value = "/GetCurrentRoom",method = RequestMethod.GET)
     @ResponseBody
-    private Object GetCurrentRoom(){
+    public Object GetCurrentRoom(){
         resultMap.put("discription",this.game.getCurrentPlayer().currentRoom.getLongDescription());
         resultMap.put("name",game.getCurrentPlayer().currentRoom.getName());
         resultMap.put("east",0);
         resultMap.put("west",0);
         resultMap.put("south",0);
         resultMap.put("north",0);
+        resultMap.put("objects_room",this.game.getCurrentPlayer().currentRoom.getRoomObjects());
+        resultMap.put("objects_player",this.game.getCurrentPlayer().getCarryObjects());
         Set<String> keys = game.getCurrentPlayer().currentRoom.getExit().keySet();
         for(String exit : keys) {
             resultMap.replace(exit,1);
         }
         return resultMap;
+    }
+
+    @RequestMapping(value = "/GetCarriedObjects",method = RequestMethod.GET)
+    @ResponseBody
+    public Object GetCarriedObjects(){
+        return this.game.getCurrentPlayer().getCarryObjects();
     }
 
     @RequestMapping(value = "/BACK",method = RequestMethod.GET)
@@ -83,6 +93,7 @@ public class GameController {
         resultMap.put("west",0);
         resultMap.put("south",0);
         resultMap.put("north",0);
+        resultMap.put("objects_room",this.game.getCurrentPlayer().currentRoom.getRoomObjects());
         Set<String> keys = game.getCurrentPlayer().currentRoom.getExit().keySet();
         for(String exit : keys) {
             resultMap.replace(exit,1);
@@ -90,4 +101,27 @@ public class GameController {
         return resultMap;
     }
 
+    @RequestMapping(value = "/TAKE",method = RequestMethod.GET)
+    @ResponseBody
+    private Object TAKE(String name){
+        Player player=this.game.getCurrentPlayer();
+        if(CommandService.DoCommandTAKE(this.game,player.getCurrentRoom().getRoomObject(name))){
+            resultMap.put("status",1);
+        }else{
+            resultMap.put("status",0);
+        }
+        return resultMap;
+    }
+
+    @RequestMapping(value = "/DROP",method = RequestMethod.GET)
+    @ResponseBody
+    private Object DROP(String name){
+        Player player=this.game.getCurrentPlayer();
+        if (CommandService.DoCommandDROP(this.game,player.getCarryObject(name))){
+            resultMap.put("status",1);
+        }else{
+            resultMap.put("status",0);
+        }
+        return resultMap;
+    }
 }

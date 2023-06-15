@@ -9,7 +9,7 @@ public class Player {
 
 
     public Player() {
-        this.maxObjectWeight = 5;
+        this.maxObjectWeight = 10;
         this.carryObjects = new ArrayList<>();
         this.currentRoom = null;
     }
@@ -20,39 +20,61 @@ public class Player {
         this.currentRoom = currentRoom;
     }
 
-    public void takeObject(RoomObject roomObject) {
+    public boolean takeObject(RoomObject roomObject) {
         if (roomObject == null) {
-            return;
-        }
+            return false;
+        }else {
+            int weight = 0;
+            for (RoomObject o: carryObjects) {
+                weight += o.getWeight();
+            }
+
+            if (roomObject.getWeight() + weight > maxObjectWeight) {
+                return false;
+            }else {
+                // 若不超过，将该物品加入到玩家随身携带的物品集合中
+                carryObjects.add(roomObject);
+                currentRoom.getRoomObjects().remove(roomObject);
+                return true;
+            }
+            }
+
 
         // 判断是否超过重量上限
-        int weight = 0;
-        for (RoomObject o: carryObjects) {
-            weight += o.getWeight();
-        }
 
-        if (roomObject.getWeight() + weight > maxObjectWeight) {
-            return;
-        }
-
-        // 若不超过，将该物品加入到玩家随身携带的物品集合中
-        carryObjects.add(roomObject);
     }
 
-    public void dropObject(RoomObject roomObject) {
+    public boolean dropObject(RoomObject roomObject) {
         if (roomObject == null) {
-            return;
+            return false;
+        }else {
+            for (int i = 0; i < carryObjects.size(); i++) {
+                if (carryObjects.get(i) == roomObject) {
+
+                    carryObjects.remove(i);
+                    currentRoom.addObject(roomObject);
+                    return true;
+                }
+            }
+            return false;
+
         }
 
-        for (int i = 0; i < carryObjects.size(); i++) {
-            if (carryObjects.get(i) == roomObject) {
-                carryObjects.remove(i);
-                return;
-            }
-        }
+
     }
 
     public ArrayList<RoomObject> getCarryObjects() {
         return carryObjects;
+    }
+
+    public RoomObject getCarryObject(String name) {
+
+        RoomObject object=null;
+        for(RoomObject ob:carryObjects){
+            if (ob.name.equals(name)){
+                object=ob;
+            }
+        }
+        return object;
     }
 }

@@ -74,13 +74,13 @@ public class CommandService implements ICommandService{
     }
 
     @Override
-    public void DoCommandTAKE(Game game, RoomObject roomObject) {
-        game.getCurrentPlayer().takeObject(roomObject);
+    public boolean DoCommandTAKE(Game game, RoomObject roomObject) {
+        return game.getCurrentPlayer().takeObject(roomObject);
     }
 
     @Override
-    public void DoCommandDROP(Game game, RoomObject roomObject) {
-        game.getCurrentPlayer().dropObject(roomObject);
+    public boolean DoCommandDROP(Game game, RoomObject roomObject) {
+        return game.getCurrentPlayer().dropObject(roomObject);
     }
 
     public void DoCommandBACK(Game game){
