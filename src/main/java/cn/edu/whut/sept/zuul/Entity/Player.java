@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class Player {
     private final ArrayList<RoomObject> carryObjects; // 玩家随身携带的物品集合
+
+    public int getMaxObjectWeight() {
+        return maxObjectWeight;
+    }
+
     private final int maxObjectWeight;  // 玩家随身携带物品重量的上限
     public Room currentRoom;
 

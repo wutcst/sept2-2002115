@@ -13,6 +13,9 @@ table,th,td{
     border-bottom-color: white;
     color: white;
 }
+tr{
+    border-bottom: white 0.5px solid;
+}
 td{
     text-align: center;
 }

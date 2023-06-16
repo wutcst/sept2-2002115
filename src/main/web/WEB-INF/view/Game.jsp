@@ -53,6 +53,13 @@
             <tbody id="object_items">
 
             </tbody>
+            <tfoot>
+                <tr>
+                    <th class="name"></th>
+                    <th id="total" class="weight"></th>
+                    <th class="operation"></th>
+                </tr>
+            </tfoot>
         </table>
     </div>
 </body>

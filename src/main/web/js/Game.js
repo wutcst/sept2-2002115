@@ -316,18 +316,23 @@ $(document).ready(function () {
             type:"get",
             dataType:"json",
             async:false,
-            success:function (objects) {
+            success:function (result) {
                 var items='';
+                var totalweight=0;
                 var table_body=$("#object_items");
-                for(var i=0;i<objects.length;i++){
+                var total=$("#total");
+                for(var i=0;i<result.objects_player.length;i++){
                     items+='<tr>'+
-                                '<td class="name">'+objects[i].name+'</td>'+
-                                '<td class="weight">'+objects[i].weight+'</td>'+
+                                '<td class="name">'+result.objects_player[i].name+'</td>'+
+                                '<td class="weight">'+result.objects_player[i].weight+'</td>'+
                                 '<td class="operation "><button class="drop">丢弃</button></td>'+
                            '</tr>';
+                    totalweight+=result.objects_player[i].weight;
                 }
                 table_body.empty();
                 table_body.append(items);
+                total.empty();
+                total.append(totalweight+'\/'+result.maxObjectWeight)
                 $('button.drop').bind('click',drop);
             },
             error:function (e) {

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--实现接口绑定的方法-->
+<mapper namespace="cn.edu.whut.sept.zuul.Mapper.UsertMapper">
+    <select id="getUsertListlimit" resultType="cn.edu.whut.sept.zuul.Entity.UserT">
+        select * from usertable order by id limit #{init_index},#{size}
+    </select>
+    <select id="getCount" resultType="int">
+        select count(*) from usertable
+    </select>
+    <select id="getUsertListByname" resultType="cn.edu.whut.sept.zuul.Entity.UserT">
+        select * from usertable where username like concat('%',${name},'%') order by id
+    </select>
+    <select id="getUsertList" resultType="cn.edu.whut.sept.zuul.Entity.UserT"   >
+        select * from usertable limit #{page},#{size}
+    </select>
+    <select id="addUser" parameterType="cn.edu.whut.sept.zuul.Entity.UserT"   >
+        insert into usertable (username,password,email,birthday,money)
+        values (#{username},#{password},#{email},#{birthday},#{money})
+    </select>
+    <select id="getUserbyId" parameterType="int" resultType="cn.edu.whut.sept.zuul.Entity.UserT"   >
+        select * from usertable where id=#{id}
+    </select>
+    <select id="updateUser" resultType="cn.edu.whut.sept.zuul.Entity.UserT"   >
+        update usertable set username=#{username},password=#{password},email=#{email},birthday=#{birthday},money=#{money}
+                     where id=#{id}
+    </select>
+    <select id="deleteUser" parameterType="int"   >
+        delete from usertable where id=#{id}
+    </select>
+    <select id="getUserListByName" parameterType="java.lang.String" resultType="cn.edu.whut.sept.zuul.Entity.UserT"   >
+        select * from usertable where username like #{name} limit #{page},#{size}
+    </select>
+    <select id="getUserByName" parameterType="java.lang.String" resultType="cn.edu.whut.sept.zuul.Entity.UserT"   >
+        select * from usertable where username = #{name}
+    </select>
+    <select id="isExist" parameterType="cn.edu.whut.sept.zuul.Entity.UserT" resultType="cn.edu.whut.sept.zuul.Entity.UserT"   >
+        select * from usertable where username=#{username} and password=#{password}
+    </select>
+    <select id="updatePWD" parameterType="cn.edu.whut.sept.zuul.Entity.UserT"  >
+        update usertable set password=#{password} where id=#{id}
+    </select>
+</mapper>

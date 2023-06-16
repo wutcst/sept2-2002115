@@ -80,7 +80,9 @@ public class GameController {
     @RequestMapping(value = "/GetCarriedObjects",method = RequestMethod.GET)
     @ResponseBody
     public Object GetCarriedObjects(){
-        return this.game.getCurrentPlayer().getCarryObjects();
+        resultMap.put("objects_player",this.game.getCurrentPlayer().getCarryObjects());
+        resultMap.put("maxObjectWeight",this.game.getCurrentPlayer().getMaxObjectWeight());
+        return resultMap;
     }
 
     @RequestMapping(value = "/BACK",method = RequestMethod.GET)
