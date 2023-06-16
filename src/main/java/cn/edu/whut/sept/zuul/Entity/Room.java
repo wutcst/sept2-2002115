@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 public class Room {
-    private String name;
+    private final String name;
     private final String description;
     private final HashMap<String, Room> exits;        // stores exits of this room.
     private final ArrayList<RoomObject> roomObjects;    // 房间内含有的物品
@@ -47,7 +47,7 @@ public class Room {
         return returnString.toString();
     }
 
-    public cn.edu.whut.sept.zuul.Entity.Room getExit(String direction)
+    public Room getExit(String direction)
     {
         return exits.get(direction);
     }
@@ -79,4 +79,18 @@ public class Room {
         return transfer;
     }
     public String getName(){return name;}
+
+    public ArrayList<RoomObject> getRoomObjects(){
+        return this.roomObjects;
+    }
+
+    public RoomObject getRoomObject(String name){
+        RoomObject object=null;
+        for(RoomObject ob:roomObjects){
+            if (ob.name.equals(name)){
+                object=ob;
+            }
+        }
+        return object;
+    }
 }

@@ -1,12 +1,10 @@
 package cn.edu.whut.sept.zuul.Entity;
 
 public class RoomObject {
-    private final String name; // 描述信息
+    public final String name; // 描述信息
     private final int weight; // 重量
 
     //物品坐标
-    private int left;
-    private int top;
 
     public RoomObject(String name, int weight) {
         this.name = name;
@@ -17,5 +15,9 @@ public class RoomObject {
         return "description: " + name +
                 ",  weight: " +
                 weight;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }

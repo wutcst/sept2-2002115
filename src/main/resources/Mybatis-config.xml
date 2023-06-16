@@ -19,7 +19,7 @@
 
     </environments>
     <mappers>
-        <mapper resource="com/whut/mapper/UsertMapper.xml"/>
+        <mapper resource="cn/edu/whut/sept/zuul/Mapper/UsertMapper.xml"/>
     </mappers>
 </configuration>
 

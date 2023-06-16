@@ -1,8 +1,32 @@
 body{
+
     padding: 0;
     margin: 0;
     width: 1519px;
     background-color: black;
+}
+table,th,td{
+    margin: 0;
+    padding: 0;
+    border: black 0.5px solid;
+    border-collapse: collapse;
+    border-bottom-color: white;
+    color: white;
+}
+tr{
+    border-bottom: white 0.5px solid;
+}
+td{
+    text-align: center;
+}
+.name{
+    width: 150px;
+}
+.weight{
+    width: 100px;
+}
+.operation{
+    width: 100px;
 }
 #text-aera{
     color: white;
@@ -43,6 +67,13 @@ body{
     width: 50px;
     background-color: greenyellow;
 }
+#object_table{
+    position: absolute;
+    top: 250px;
+    left: 1090px;
+    width: 350px;
+    height: 50px;
+}
 #control{
     position: relative;
     left: 50%;
@@ -52,48 +83,91 @@ pre{
     font-size:16px; /*设置字号*/
 }
 /*方向标*/
-#east{
-
+.direction{
     position: absolute;
     width: 50px;
     height: 50px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    display: none;
+}
+#east{
     left: 600px;
     top: 150px;
     background-image: url(/images/east.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: none;
 }
 #west{
-    position: absolute;
-    width: 50px;
-    height: 50px;
     left: 0px;
     top: 150px;
     background-image: url(/images/west.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: none;
 }
 #south{
-    position: absolute;
-    width: 50px;
-    height: 50px;
     left: 300px;
     top: 300px;
     background-image: url(/images/south.png);
-    background-repeat: no-repeat;
-    background-size: 100%;
-    display: none;
 }
 #north{
-    position: absolute;
-    width: 50px;
-    height: 50px;
     left: 300px;
     top: 0px;
     background-image: url(/images/north.png);
+}
+/*物品显示*/
+.object{
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    display: none;
     background-repeat: no-repeat;
     background-size: 100%;
-    display: none;
+    /*display: none;*/
+}
+.object:hover{
+    width: 55px;
+}
+#TV{
+    left: 100px ;
+    top: 150px;
+    background-image: url(/images/TV.png);
+}
+#seat{
+    left: 550px;
+    top: 250px;
+    background-image: url(/images/seat.png);
+}
+#cup{
+    left: 400px;
+    top: 200px;
+    background-image: url(/images/cup.png);
+}
+#wine{
+    left: 200px;
+    top: 200px;
+    background-image: url(/images/wine.png);
+}
+#microscope{
+    left: 200px;
+    top: 250px;
+    background-image: url(/images/microscope.png);
+}
+#computer{
+    left: 400px;
+    top: 250px;
+    background-image: url(/images/computer.png);
+}
+#desk{
+    left: 400px;
+    top: 300px;
+    background-image: url(/images/desk.png);
+}
+#book{
+    left: 300px;
+    top: 325px;
+    background-image: url(/images/book.png);
+}
+#pen{
+    left: 250px;
+    top: 300px;
+    background-image: url(/images/pen.png);
 }
