@@ -126,7 +126,6 @@ $(document).ready(function () {
                 }
             });
     }
-
     //help弹出窗口
     function help() {
         alert("You are lost. You are alone. You wander\n" +
@@ -137,7 +136,6 @@ $(document).ready(function () {
             "\"帮助\">>you will see this window again~\n"
         );
     }
-
     //look命令
     function look(){
         $.ajax({
@@ -156,7 +154,6 @@ $(document).ready(function () {
             }
         });
     }
-
     //back命令
     function back() {
         $.ajax({
@@ -181,7 +178,6 @@ $(document).ready(function () {
             }
         });
     }
-    
     //take命令
     function take() {
         var name=this.id;
@@ -340,10 +336,6 @@ $(document).ready(function () {
             }
         });
     }
-
-
-
-
     //添加键盘监听
     function movesquare(e) {
         //判断键盘输入是否为 ← 键
@@ -435,7 +427,6 @@ $(document).ready(function () {
             back();
         }
     }
-
 });
 
 
